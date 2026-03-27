@@ -282,6 +282,13 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 		return handleTouchEvent(event);
 	}
 
+	public boolean onHoverEvent(MotionEvent event) {
+		if (isMouseEvent(event)) {
+			return handleMouseEvent(event);
+		}
+		return handleTouchEvent(event);
+	}
+
 	public boolean onGenericMotionEvent(MotionEvent event) {
 		lastSeenToolType.set(getEventToolType(event));
 
@@ -788,9 +795,7 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 
 	private void dispatchInputEventRunnable(@NonNull InputEventRunnable runnable) {
 		if (shouldDispatchInputToRenderThread()) {
-			if (!godot.runOnRenderThread(runnable)) {
-				runnable.run();
-			}
+			godot.runOnRenderThread(runnable);
 		} else {
 			runnable.run();
 		}
