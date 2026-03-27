@@ -282,6 +282,13 @@ public class GodotInputHandler implements InputManager.InputDeviceListener, Sens
 		return handleTouchEvent(event);
 	}
 
+	public boolean onHoverEvent(MotionEvent event) {
+		if (isMouseEvent(event)) {
+			return handleMouseEvent(event);
+		}
+		return handleTouchEvent(event);
+	}
+
 	public boolean onGenericMotionEvent(MotionEvent event) {
 		lastSeenToolType.set(getEventToolType(event));
 

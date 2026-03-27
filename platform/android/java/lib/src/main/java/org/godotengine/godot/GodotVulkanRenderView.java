@@ -147,6 +147,11 @@ class GodotVulkanRenderView extends VkSurfaceView implements GodotRenderView {
 	}
 
 	@Override
+	public boolean onHoverEvent(MotionEvent event) {
+		return mInputHandler.onHoverEvent(event) || super.onHoverEvent(event);
+	}
+
+	@Override
 	public boolean onCapturedPointerEvent(MotionEvent event) {
 		return mInputHandler.onGenericMotionEvent(event);
 	}
